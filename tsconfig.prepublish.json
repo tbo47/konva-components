@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ESNext", // Use ESNext for modern JavaScript
+        "module": "ESNext", // Use ESNext module syntax
+        "declaration": true, // Generate .d.ts files
+        "outDir": ".", // Output files to the root directory
+        "rootDir": "src", // Specify the root directory of input files
+        "strict": true, // Enable strict type-checking options
+        "esModuleInterop": true, // Enable interoperability between CommonJS and ES modules
+        "skipLibCheck": true // Skip type checking of declaration files
+    },
+    "include": ["src/Cloud.ts"], // Include only the main file
+    "exclude": ["node_modules", "dist"] // Exclude unnecessary files
+}
