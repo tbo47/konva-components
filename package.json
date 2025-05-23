@@ -1,15 +1,15 @@
 {
-    "name": "konva-cloud",
+    "name": "konva-es-components",
     "version": "1.0.0",
     "type": "module",
     "author": "tbo47",
-    "description": "A konva cloud",
+    "description": "Konva components for konva-es",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/tbo47/konva-cloud.git"
+        "url": "git+https://github.com/tbo47/konva-components.git"
     },
     "scripts": {
-        "prepublish": "rm Cloud* ; ./node_modules/typescript/bin/tsc -p tsconfig.prepublish.json"
+        "prepublish": "./node_modules/typescript/bin/tsc -p tsconfig.prepublish.json"
     },
     "dependencies": {
         "konva-es": "^9.3.20"
@@ -18,9 +18,11 @@
         "typescript": "~5.8.3"
     },
     "files": [
+        "./index.js",
         "./Cloud.js",
-        "./Cloud.d.ts"
+        "./Cloud.d.ts",
+        "./EditableText.js",
+        "./EditableText.d.ts"
     ],
-    "types": "./Cloud.d.ts",
     "license": "MIT"
 }

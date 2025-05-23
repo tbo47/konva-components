@@ -1,3 +1,6 @@
+/**
+ * https://github.com/tbo47/konva-components
+ */
 import { Konva } from 'konva-es/lib/Global'
 import { Text, TextConfig } from 'konva-es/lib/shapes/Text'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'

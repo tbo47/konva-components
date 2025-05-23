@@ -9,6 +9,6 @@
         "esModuleInterop": true, // Enable interoperability between CommonJS and ES modules
         "skipLibCheck": true // Skip type checking of declaration files
     },
-    "include": ["src/Cloud.ts"], // Include only the main file
+    "include": ["src/*.ts"], // Include only the main file
     "exclude": ["node_modules", "dist"] // Exclude unnecessary files
 }

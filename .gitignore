@@ -1,4 +1,6 @@
 node_modules
 Cloud.js
 Cloud.d.ts
+EditableText.js
+EditableText.d.ts
 package-lock.json
