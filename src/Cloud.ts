@@ -80,6 +80,8 @@ export class Cloud extends Path {
     constructor(config: CloudConfig) {
         config.name = config.name || 'clouding'
         config.stroke = config.stroke || '#0058ff'
+        config.width = config.width || 200
+        config.height = config.height || 100
         super(config)
         this.#pattern = config.pattern || 0
         this.adjustPath(config.width || 0, config.height || 0)
