@@ -13,6 +13,7 @@ const stage = new ScrollableStage({
     container: 'container', // id of container <div>
     width: window.innerWidth,
     height: window.innerHeight,
+    scaleBy: 1.02, // how strong is the zoom
 })
 
 const layer = new Konva.Layer()
