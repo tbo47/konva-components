@@ -9,6 +9,11 @@ This regroups components build on top of [konva-es](https://www.npmjs.com/packag
 [Here is a demo and the code is bellow](https://control-and-command.com/#/demo):
 
 ```javascript
+import { Cloud, EditableText, newTransformerForText, ScrollableStage } from 'konva-es-components'
+import { Layer } from 'konva-es/lib/Layer'
+import { Transformer } from 'konva-es/lib/shapes/Transformer'
+
+
 const stage = new ScrollableStage({
     container: 'container', // id of container <div>
     width: window.innerWidth,
@@ -27,7 +32,7 @@ tr.nodes([cloud])
 
 const tt = newTransformerForText()
 layer.add(tt)
-const txt = new EditableText({ x: 100, y: 300, draggable: true, text, transformer: tt })
+const txt = new EditableText({ x: 100, y: 300, draggable: true, text: 'Example', transformer: tt })
 layer.add(txt)
 tt.nodes([txt])
 ```
