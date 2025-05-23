@@ -5,4 +5,6 @@ Cloud.js
 Cloud.d.ts
 EditableText.js
 EditableText.d.ts
+ScrollableStage.js
+ScrollableStage.d.ts
 package-lock.json

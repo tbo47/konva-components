@@ -4,6 +4,7 @@ This regroups components build on top of [konva-es](https://www.npmjs.com/packag
 
 -   [Cloud.ts](src/Cloud.ts) let you draw clouds on a board.
 -   [EditableText.ts](src/EditableText.ts) is [this example](https://konvajs.org/docs/sandbox/Editable_Text.html) wrapped in a component with some improvements.
+-   [ScrollableStage.ts](src/ScrollableStage.ts) is [this example](https://konvajs.org/docs/sandbox/Zooming_Relative_To_Pointer.html)
 
 [Demo here](https://control-and-command.com/#/demo)
 
