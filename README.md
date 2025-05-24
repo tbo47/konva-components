@@ -26,7 +26,7 @@ stage.add(layer)
 
 const tr = new Konva.Transformer()
 layer.add(tr)
-const cloud = new Cloud({ x: 100, y: 120, draggable: true })
+const cloud = new Cloud({ x: 100, y: 120, draggable: true, pattern: 1 })
 layer.add(cloud)
 tr.nodes([cloud])
 
