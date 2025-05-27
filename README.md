@@ -1,6 +1,10 @@
 This regroups components build on top of [konva-es](https://www.npmjs.com/package/konva-es).
 
-[![NPM package](https://img.shields.io/npm/dw/konva-es-components.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/konva-es-components)
+<p align="center">
+<a href="https://tbo47.github.io/" ><img src="https://img.shields.io/badge/created_by-tbo47-blue.svg" alt="Created by tbo47"></a>
+<a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/konva-es-components" rel="nofollow"><img src="https://img.shields.io/npm/dw/konva-es-components.svg" alt="npm"></a>
+</p>
 
 -   [ScrollableStage.ts](src/ScrollableStage.ts) is [this example](https://konvajs.org/docs/sandbox/Zooming_Relative_To_Pointer.html)
 -   [Cloud.ts](src/Cloud.ts) let you draw clouds
@@ -12,7 +16,6 @@ This regroups components build on top of [konva-es](https://www.npmjs.com/packag
 import { Cloud, EditableText, newTransformerForText, ScrollableStage } from 'konva-es-components'
 import { Layer } from 'konva-es/lib/Layer'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-
 
 const stage = new ScrollableStage({
     container: 'container', // id of container <div>

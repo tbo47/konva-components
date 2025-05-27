@@ -27,18 +27,6 @@ export interface CloudConfig extends PathConfig {
  */
 export const CLOUDS: ICloudPattern[] = [
     {
-        topPath: `a 8 8 0 0 1 14 5`,
-        topOffset: `m -2 -5`,
-        topWidth: 12,
-        rightPath: `a 8 8 0 0 1 -5 14`,
-        rightOffset: `m 5 -2`,
-        bottomPath: `a 8 8 0 0 1 -14 -5`,
-        bottomOffset: `m 2 5`,
-        leftPath: `a 8 8 0 0 1 5 -14`,
-        leftOffset: `m -5 2`,
-        leftHeight: 12,
-    },
-    {
         topPath: `a 3 3 0 0 1 4 -2 a 4.6 4.6 0 0 1 8 2`,
         topOffset: `m 0 0`,
         topWidth: 12,
@@ -48,6 +36,18 @@ export const CLOUDS: ICloudPattern[] = [
         bottomOffset: `m 0 0`,
         leftPath: `a 3 3 0 0 1 -2 -4 a  4.6 4.6 0 0 1 2 -8`,
         leftOffset: `m 0 0`,
+        leftHeight: 12,
+    },
+    {
+        topPath: `a 8 8 0 0 1 14 5`,
+        topOffset: `m -2 -5`,
+        topWidth: 12,
+        rightPath: `a 8 8 0 0 1 -5 14`,
+        rightOffset: `m 5 -2`,
+        bottomPath: `a 8 8 0 0 1 -14 -5`,
+        bottomOffset: `m 2 5`,
+        leftPath: `a 8 8 0 0 1 5 -14`,
+        leftOffset: `m -5 2`,
         leftHeight: 12,
     },
 ]
@@ -84,7 +84,7 @@ export class Cloud extends Path {
         config.height = config.height || 100
         super(config)
         this.#pattern = config.pattern || 0
-        this.adjustPath(config.width || 0, config.height || 0)
+        this.adjustPath(config.width, config.height)
 
         this.on('transformend', (e) => {
             let { width, height } = this.getClientRect()

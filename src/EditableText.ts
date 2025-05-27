@@ -12,6 +12,8 @@ export interface EditableTextConfig extends TextConfig {
 export const newTransformerForText = () => {
     return new Transformer({
         enabledAnchors: ['middle-left', 'middle-right'],
+        rotationSnaps: [0],
+        rotationSnapTolerance: 3,
         boundBoxFunc: (oldBox, newBox) => {
             newBox.width = Math.max(30, newBox.width)
             return newBox
