@@ -1,6 +1,6 @@
 {
     "name": "konva-es-components",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "type": "module",
     "author": "tbo47",
     "description": "Konva components for konva-es",
@@ -9,7 +9,9 @@
         "url": "git+https://github.com/tbo47/konva-components.git"
     },
     "scripts": {
-        "prepublish": "./node_modules/typescript/bin/tsc -p tsconfig.prepublish.json"
+        "clean": "rm -rf *.js *.d.ts",
+        "build": "npm run clean ; tsc",
+        "watch": "npm run clean ; tsc --watch"
     },
     "dependencies": {
         "konva-es": "^9.3.20"

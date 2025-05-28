@@ -1,24 +1,15 @@
 {
     "compilerOptions": {
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "module": "ESNext",
-        "lib": ["ESNext", "dom"],
-        "skipLibCheck": true,
-
-        /* Bundler mode */
+        "target": "ESNext", // Use ESNext for modern JavaScript
+        "module": "ESNext", // Use ESNext module syntax
+        "declaration": true, // Generate .d.ts files
         "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "moduleDetection": "force",
-        "noEmit": true,
-
-        /* Linting */
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "noUncheckedSideEffectImports": true
+        "outDir": ".", // Output files to the root directory
+        "rootDir": "src", // Specify the root directory of input files
+        "strict": true, // Enable strict type-checking options
+        // "esModuleInterop": true, // Enable interoperability between CommonJS and ES modules
+        "skipLibCheck": true // Skip type checking of declaration files
     },
-    "include": ["src"]
+    "include": ["src/*.ts"], // Include only the main file
+    "exclude": ["dist"] // Exclude unnecessary files
 }
