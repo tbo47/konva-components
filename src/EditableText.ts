@@ -67,8 +67,19 @@ export class EditableText extends Text {
     }
 
     #textNodeOnDblClick() {
-        return new Promise<void>((resolve) => {
-            const stage = this.getStage()!
+        return new Promise<void>(async (resolve) => {
+            let stage = this.getStage()
+            if (!stage) {
+                await new Promise((resolve) => setTimeout(resolve))
+                stage = this.getStage()
+            }
+
+            if (!stage) {
+                console.error('EditableText: No stage found')
+                resolve()
+                return
+            }
+
             this.hide()
             this.transformer.hide()
 

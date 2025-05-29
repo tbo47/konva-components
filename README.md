@@ -41,3 +41,5 @@ tt.nodes([txt])
 ```
 
 Note: to use with [konva](https://www.npmjs.com/package/konva), just change `konva-es` by `konva` in the imports.
+
+Install in your project: `npm install konva-es-components`

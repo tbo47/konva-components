@@ -45,5 +45,21 @@ export class ScrollableStage extends Stage {
             }
             stage.position(newPos)
         })
+        this.#preventDefaultTouchActions()
+    }
+
+    /**
+     * Prevent default touch actions to avoid zooming and scrolling
+     * Useful for mobile devices
+     */
+    #preventDefaultTouchActions() {
+        document.addEventListener('gesturestart', (e) => e.preventDefault())
+        document.addEventListener(
+            'touchmove',
+            (e) => {
+                e.preventDefault()
+            },
+            { passive: false }
+        )
     }
 }
