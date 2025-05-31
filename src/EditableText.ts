@@ -39,6 +39,10 @@ export class EditableText extends Text {
             e.cancelBubble = true
             this.#textNodeOnDblClick()
         })
+        if (!('ontouchstart' in window)) {
+            this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
+            this.on('mouseout', (e) => (e.target.getStage()!.container().style.cursor = 'default'))
+        }
     }
 
     async ajustHeight() {

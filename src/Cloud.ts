@@ -1,7 +1,9 @@
 /**
  * https://github.com/tbo47/konva-components
  */
+import { Layer } from 'konva-es/lib/Layer'
 import { Path, PathConfig } from 'konva-es/lib/shapes/Path'
+import { Stage } from 'konva-es/lib/Stage'
 
 /**
  * https://yqnn.github.io/svg-path-editor/#P=m0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_2_4_a_4.6_4.6_0_0_1_-2_8_m_0_0_a_3_3_0_0_1_2_4_a_4.6_4.6_0_0_1_-2_8_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-2_-4_a_4.6_4.6_0_0_1_2_-8_m_0_0_a_3_3_0_0_1_-2_-4_a_4.6_4.6_0_0_1_2_-8_m_0_0
@@ -20,6 +22,7 @@ export interface ICloudPattern {
 }
 export interface CloudConfig extends PathConfig {
     pattern?: 0 | 1
+    transformFollowLayer?: boolean
 }
 
 /**
@@ -88,9 +91,17 @@ export class Cloud extends Path {
 
         this.on('transformend', (e) => {
             let { width, height } = this.getClientRect()
-            const layer = this.getLayer()
-            const scaleX = layer?.scaleX() || 1
-            const scaleY = layer?.scaleY() || 1
+            let scaleX = 1
+            let scaleY = 1
+            if (config.transformFollowLayer) {
+                const layer = this.getLayer()!
+                scaleX = layer.scaleX()
+                scaleY = layer.scaleY()
+            } else {
+                const stage = this.getStage()!
+                scaleX = stage.scaleX()
+                scaleY = stage.scaleY()
+            }
             width = width / scaleX
             height = height / scaleY
 
@@ -109,6 +120,10 @@ export class Cloud extends Path {
             context.closePath()
             context.fillStrokeShape(this)
         })
+        if (!('ontouchstart' in window)) {
+            this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
+            this.on('mouseout', (e) => (e.target.getStage()!.container().style.cursor = 'default'))
+        }
     }
     adjustPath(width: number, height: number) {
         const p = CLOUDS[this.#pattern]
