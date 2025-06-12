@@ -1,12 +1,14 @@
 This regroups components build on top of [konva-es](https://www.npmjs.com/package/konva-es).
 
+As on a [Figma](figma.com) whiteboard, navigation is done by holding down the Control key and scrolling.
+
 <p align="center">
 <a href="https://tbo47.github.io/" ><img src="https://img.shields.io/badge/created_by-tbo47-blue.svg" alt="Created by tbo47"></a>
 <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
 <a href="https://www.npmjs.com/package/konva-es-components" rel="nofollow"><img src="https://img.shields.io/npm/dw/konva-es-components.svg" alt="npm"></a>
 </p>
 
--   [ScrollableStage.ts](src/ScrollableStage.ts) is [this example](https://konvajs.org/docs/sandbox/Zooming_Relative_To_Pointer.html)
+-   [ScrollableStage.ts](src/ScrollableStage.ts) is [this ex](https://konvajs.org/docs/sandbox/Zooming_Relative_To_Pointer.html) and [this one](https://konvajs.org/docs/sandbox/Multi-touch_Scale_Stage.html)
 -   [Cloud.ts](src/Cloud.ts) let you draw clouds
 -   [EditableText.ts](src/EditableText.ts) is [this example](https://konvajs.org/docs/sandbox/Editable_Text.html) wrapped in a component with some changes
 
