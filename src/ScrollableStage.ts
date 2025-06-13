@@ -140,7 +140,7 @@ export class ScrollableStage extends Stage {
             y: (pointer.y - this.y()) / oldScale,
         }
 
-        scaleBy = isTrackpad ? scaleBy : scaleBy * 2
+        scaleBy = isTrackpad ? scaleBy : scaleBy * 1.2
         const newScale = evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy
 
         this.scale({ x: newScale, y: newScale })
@@ -161,16 +161,11 @@ export class ScrollableStage extends Stage {
     }
 
     // https://stackoverflow.com/questions/10744645/detect-touchpad-vs-mouse-in-javascript
-    #detectTrackpad(event: WheelEvent): boolean {
-        const e = event as any
-        let isTrackpad = false
-        if (e.wheelDeltaY) {
-            if (e.wheelDeltaY === e.deltaY * -3) {
-                isTrackpad = true
-            }
-        } else if (e.deltaMode === 0) {
-            isTrackpad = true
+    #detectTrackpad(event: WheelEvent) {
+        const { deltaY } = event
+        if (deltaY && !Number.isInteger(deltaY)) {
+            return false
         }
-        return isTrackpad
+        return true
     }
 }
