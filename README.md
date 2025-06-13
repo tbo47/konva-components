@@ -25,17 +25,17 @@ const stage = new ScrollableStage({
 const layer = new Layer()
 stage.add(layer)
 
-const tr = newComponentTransformer()
-layer.add(tr)
-const cloud = new Cloud({ x: 100, y: 120, draggable: true })
-layer.add(cloud)
-tr.nodes([cloud])
-
 const tt = newTransformerForText()
 layer.add(tt)
-const txt = new EditableText({ x: 100, y: 300, width: 400, draggable: true, text, transformer: tt })
+const txt = new EditableText({ x: 30, y: 30, width: 400, draggable: true, text, transformer: tt })
 layer.add(txt)
-tt.nodes([txt])
+txt.on('click tap', () => tt.nodes([txt]))
+
+const tr = newComponentTransformer()
+layer.add(tr)
+const cloud = new Cloud({ x: 100, y: 360, draggable: true })
+layer.add(cloud)
+cloud.on('click tap', () => tr.nodes([cloud]))
 ```
 
 Note: to use with [konva](https://www.npmjs.com/package/konva), just change `konva-es` by `konva` in the imports.

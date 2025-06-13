@@ -4,6 +4,7 @@
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { Stage, StageConfig } from 'konva-es/lib/Stage'
 import { Vector2d } from 'konva-es/lib/types'
+import { Transform } from 'konva-es/lib/Util'
 
 export interface ScrollableStageConfig extends StageConfig {
     scaleBy?: number
@@ -30,7 +31,7 @@ export class ScrollableStage extends Stage {
     constructor(config: ScrollableStageConfig) {
         config.width = config.width || window.innerWidth
         config.height = config.height || window.innerHeight
-        config.draggable = config.draggable || isTouchDevice
+        config.draggable = true
         super(config)
         const scaleBy = config.scaleBy ?? 1.02
         this.on('wheel', (e) => {
@@ -113,6 +114,29 @@ export class ScrollableStage extends Stage {
             this.#lastDist = 0
             this.#lastCenter = null
         })
+
+        this.on('click tap', (e) => {
+            if (e.target === this) this.hideTransformers()
+        })
+    }
+
+    hideTransformers() {
+        this.getTransformers().forEach((tr) => tr.nodes([]))
+    }
+
+    /**
+     * Get all transformers in the stage.
+     */
+    getTransformers() {
+        const transformers: Transformer[] = []
+        this.getLayers().forEach((layer) => {
+            layer.getChildren().forEach((child) => {
+                if (child instanceof Transformer) {
+                    transformers.push(child)
+                }
+            })
+        })
+        return transformers
     }
 
     /**
@@ -171,7 +195,7 @@ export class ScrollableStage extends Stage {
     }
 }
 /**
- * Creates a new Transformer with snap effects and fixed for touch devices. 
+ * Creates a new Transformer with snap effects and fixed for touch devices.
  */
 export const newComponentTransformer = () => {
     return new Transformer({
