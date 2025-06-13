@@ -1,7 +1,5 @@
 This regroups components build on top of [konva-es](https://www.npmjs.com/package/konva-es).
 
-As on a [Figma](figma.com) whiteboard, navigation is done by holding down the Control key and scrolling.
-
 <p align="center">
 <a href="https://tbo47.github.io/" ><img src="https://img.shields.io/badge/created_by-tbo47-blue.svg" alt="Created by tbo47"></a>
 <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>

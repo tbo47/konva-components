@@ -19,14 +19,19 @@ function getCenter(p1: Vector2d, p2: Vector2d) {
     }
 }
 
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+
 export class ScrollableStage extends Stage {
-    lastCenter: Vector2d | null = null
-    lastDist = 0
-    dragStopped = false
+    #lastCenter: Vector2d | null = null
+    #lastDist = 0
+    #dragStopped = false
 
     constructor(config: ScrollableStageConfig) {
+        config.width = config.width || window.innerWidth
+        config.height = config.height || window.innerHeight
+        config.draggable = config.draggable || isTouchDevice
         super(config)
-        const scaleBy = config.scaleBy ?? 1.01
+        const scaleBy = config.scaleBy ?? 1.02
         this.on('wheel', (e) => {
             e.evt.preventDefault()
             if (e.evt.ctrlKey) {
@@ -44,16 +49,16 @@ export class ScrollableStage extends Stage {
             const touch2 = e.evt.touches[1]
 
             // we need to restore dragging, if it was cancelled by multi-touch
-            if (touch1 && !touch2 && !this.isDragging() && this.dragStopped) {
+            if (touch1 && !touch2 && !this.isDragging() && this.#dragStopped) {
                 this.startDrag()
-                this.dragStopped = false
+                this.#dragStopped = false
             }
 
             if (touch1 && touch2) {
                 // if the stage was under Konva's drag&drop
                 // we need to stop it, and implement our own pan logic with two pointers
                 if (this.isDragging()) {
-                    this.dragStopped = true
+                    this.#dragStopped = true
                     this.stopDrag()
                 }
 
@@ -66,17 +71,15 @@ export class ScrollableStage extends Stage {
                     y: touch2.clientY,
                 }
 
-                if (!this.lastCenter) {
-                    this.lastCenter = getCenter(p1, p2)
+                if (!this.#lastCenter) {
+                    this.#lastCenter = getCenter(p1, p2)
                     return
                 }
                 const newCenter = getCenter(p1, p2)
 
                 const dist = getDistance(p1, p2)
 
-                if (!this.lastDist) {
-                    this.lastDist = dist
-                }
+                if (!this.#lastDist) this.#lastDist = dist
 
                 // local coordinates of center point
                 const pointTo = {
@@ -84,14 +87,14 @@ export class ScrollableStage extends Stage {
                     y: (newCenter.y - this.y()) / this.scaleX(),
                 }
 
-                const scale = this.scaleX() * (dist / this.lastDist)
+                const scale = this.scaleX() * (dist / this.#lastDist)
 
                 this.scaleX(scale)
                 this.scaleY(scale)
 
                 // calculate new position of the stage
-                const dx = newCenter.x - this.lastCenter.x
-                const dy = newCenter.y - this.lastCenter.y
+                const dx = newCenter.x - this.#lastCenter.x
+                const dy = newCenter.y - this.#lastCenter.y
 
                 const newPos = {
                     x: newCenter.x - pointTo.x * scale + dx,
@@ -100,14 +103,14 @@ export class ScrollableStage extends Stage {
 
                 this.position(newPos)
 
-                this.lastDist = dist
-                this.lastCenter = newCenter
+                this.#lastDist = dist
+                this.#lastCenter = newCenter
             }
         })
 
         this.on('touchend', () => {
-            this.lastDist = 0
-            this.lastCenter = null
+            this.#lastDist = 0
+            this.#lastCenter = null
         })
     }
 
