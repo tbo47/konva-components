@@ -2,6 +2,8 @@
  * https://github.com/tbo47/konva-components
  */
 import { Path, PathConfig } from 'konva-es/lib/shapes/Path'
+import { Transformer } from 'konva-es/lib/shapes/Transformer'
+import { GLOBAL_KONVA_COMPONENTS_CONF, hideAllSelectedShape } from './ScrollableStage'
 
 /**
  * https://yqnn.github.io/svg-path-editor/#P=m0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_2_4_a_4.6_4.6_0_0_1_-2_8_m_0_0_a_3_3_0_0_1_2_4_a_4.6_4.6_0_0_1_-2_8_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-2_-4_a_4.6_4.6_0_0_1_2_-8_m_0_0_a_3_3_0_0_1_-2_-4_a_4.6_4.6_0_0_1_2_-8_m_0_0
@@ -78,12 +80,14 @@ export const CLOUDS: ICloudPattern[] = [
  */
 export class Cloud extends Path {
     #pattern = 0
+    #transformer: Transformer
     constructor(config: CloudConfig) {
         config.name = config.name || 'clouding'
         config.stroke = config.stroke || '#0058ff'
         config.width = config.width || 200
         config.height = config.height || 100
         super(config)
+        this.#transformer = GLOBAL_KONVA_COMPONENTS_CONF.transformer
         this.#pattern = config.pattern || 0
         this.adjustPath(config.width, config.height)
 
@@ -122,6 +126,16 @@ export class Cloud extends Path {
             this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
             this.on('mouseout', (e) => (e.target.getStage()!.container().style.cursor = 'default'))
         }
+        this.on('click tap', () => {
+            const layer = this.#transformer.getLayer()
+            if (!layer) {
+                this.getLayer()!.add(this.#transformer)
+            }
+            hideAllSelectedShape()
+            this.#transformer.nodes([this])
+            this.draggable(true)
+            GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.push(this)
+        })
     }
     adjustPath(width: number, height: number) {
         const p = CLOUDS[this.#pattern]

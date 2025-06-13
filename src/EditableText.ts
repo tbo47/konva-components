@@ -4,35 +4,17 @@
 import { Konva } from 'konva-es/lib/Global'
 import { Text, TextConfig } from 'konva-es/lib/shapes/Text'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-
-const isTouchDevice = 'ontouchstart' in window
-
-export interface EditableTextConfig extends TextConfig {
-    transformer: Transformer
-}
-
-export const newTransformerForText = () => {
-    return new Transformer({
-        enabledAnchors: ['middle-left', 'middle-right'],
-        rotationSnaps: [0],
-        anchorSize: isTouchDevice ? 20 : 10,
-        rotationSnapTolerance: 3,
-        boundBoxFunc: (oldBox, newBox) => {
-            newBox.width = Math.max(30, newBox.width)
-            return newBox
-        },
-    })
-}
+import { GLOBAL_KONVA_COMPONENTS_CONF, hideAllSelectedShape } from './ScrollableStage'
 
 export class EditableText extends Text {
     transformer: Transformer
 
-    constructor(config: EditableTextConfig) {
+    constructor(config: TextConfig) {
         Konva._fixTextRendering = true
         config.fontSize = config.fontSize || 20
         config.width = config.width || 200
         super(config)
-        this.transformer = config.transformer
+        this.transformer = GLOBAL_KONVA_COMPONENTS_CONF.editableTextTransformer
         this.on('transform', () => this.setAttrs({ width: this.width() * this.scaleX(), scaleX: 1 }))
         this.on('transformend', async () => {
             await this.ajustHeight()
@@ -46,6 +28,17 @@ export class EditableText extends Text {
             this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
             this.on('mouseout', (e) => (e.target.getStage()!.container().style.cursor = 'default'))
         }
+
+        this.on('click tap', () => {
+            const layer = this.transformer.getLayer()
+            if (!layer) {
+                this.getLayer()!.add(this.transformer)
+            }
+            hideAllSelectedShape()
+            this.transformer.nodes([this])
+            this.draggable(true)
+            GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.push(this)
+        })
     }
 
     async ajustHeight() {

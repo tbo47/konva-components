@@ -1,10 +1,57 @@
 /**
  * https://github.com/tbo47/konva-components
  */
+import { Shape } from 'konva-es/lib/Shape'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { Stage, StageConfig } from 'konva-es/lib/Stage'
 import { Vector2d } from 'konva-es/lib/types'
-import { Transform } from 'konva-es/lib/Util'
+
+export const newTransformerForText = () => {
+    return new Transformer({
+        enabledAnchors: ['middle-left', 'middle-right'],
+        rotationSnaps: [0],
+        anchorSize: isTouchDevice ? 20 : 10,
+        rotationSnapTolerance: 3,
+        boundBoxFunc: (oldBox, newBox) => {
+            newBox.width = Math.max(30, newBox.width)
+            return newBox
+        },
+    })
+}
+/**
+ * Creates a new Transformer with snap effects and fixed for touch devices.
+ */
+export const newComponentTransformer = () => {
+    return new Transformer({
+        rotationSnaps: [0],
+        anchorSize: isTouchDevice ? 20 : 10,
+        rotationSnapTolerance: 3,
+    })
+}
+
+export const GLOBAL_KONVA_COMPONENTS_CONF = {
+    /**
+     * Transformer for editable text shapes.
+     */
+    editableTextTransformer: newTransformerForText(),
+    /**
+     * All purpose transformer. For shapes that are not text.
+     */
+    transformer: newComponentTransformer(),
+    currentlySelected: [] as Shape[],
+}
+
+export const hideAllSelectedShape = () => {
+    getTransformers().forEach((tr) => tr.nodes([]))
+    GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.forEach((shape) => {
+        shape.draggable(false)
+    })
+    GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected = []
+}
+
+export const getTransformers = () => {
+    return [GLOBAL_KONVA_COMPONENTS_CONF.editableTextTransformer, GLOBAL_KONVA_COMPONENTS_CONF.transformer]
+}
 
 export interface ScrollableStageConfig extends StageConfig {
     scaleBy?: number
@@ -37,6 +84,7 @@ export class ScrollableStage extends Stage {
         this.on('wheel', (e) => {
             e.evt.preventDefault()
             if (e.evt.ctrlKey) {
+                // TODO debounce this?
                 this.#handleZoom(e.evt, scaleBy)
             } else {
                 this.#handlePan(e.evt)
@@ -116,27 +164,8 @@ export class ScrollableStage extends Stage {
         })
 
         this.on('click tap', (e) => {
-            if (e.target === this) this.hideTransformers()
+            if (e.target === this) hideAllSelectedShape()
         })
-    }
-
-    hideTransformers() {
-        this.getTransformers().forEach((tr) => tr.nodes([]))
-    }
-
-    /**
-     * Get all transformers in the stage.
-     */
-    getTransformers() {
-        const transformers: Transformer[] = []
-        this.getLayers().forEach((layer) => {
-            layer.getChildren().forEach((child) => {
-                if (child instanceof Transformer) {
-                    transformers.push(child)
-                }
-            })
-        })
-        return transformers
     }
 
     /**
@@ -193,14 +222,4 @@ export class ScrollableStage extends Stage {
         }
         return true
     }
-}
-/**
- * Creates a new Transformer with snap effects and fixed for touch devices.
- */
-export const newComponentTransformer = () => {
-    return new Transformer({
-        rotationSnaps: [0],
-        anchorSize: isTouchDevice ? 20 : 10,
-        rotationSnapTolerance: 3,
-    })
 }
