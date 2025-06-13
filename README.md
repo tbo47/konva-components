@@ -1,4 +1,4 @@
-This regroups components build on top of [konva-es](https://www.npmjs.com/package/konva-es).
+This regroups components build on top of [konva-es](https://www.npmjs.com/package/konva-es). Navigation should look familiar to Figma users.
 
 <p align="center">
 <a href="https://tbo47.github.io/" ><img src="https://img.shields.io/badge/created_by-tbo47-blue.svg" alt="Created by tbo47"></a>
