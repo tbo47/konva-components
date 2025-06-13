@@ -1,6 +1,6 @@
 {
     "name": "konva-es-components",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "type": "module",
     "author": "tbo47",
     "description": "Konva components for konva-es",
@@ -11,7 +11,7 @@
     "scripts": {
         "clean": "rm -rf *.js *.d.ts",
         "build": "npm run clean ; tsc",
-        "prepublish": "npm run build",
+        "prepublishOnly": "npm run build",
         "watch": "npm run clean ; tsc --watch"
     },
     "dependencies": {
