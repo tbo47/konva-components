@@ -5,6 +5,8 @@ import { Konva } from 'konva-es/lib/Global'
 import { Text, TextConfig } from 'konva-es/lib/shapes/Text'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
 
+const isTouchDevice = 'ontouchstart' in window
+
 export interface EditableTextConfig extends TextConfig {
     transformer: Transformer
 }
@@ -13,6 +15,7 @@ export const newTransformerForText = () => {
     return new Transformer({
         enabledAnchors: ['middle-left', 'middle-right'],
         rotationSnaps: [0],
+        anchorSize: isTouchDevice ? 20 : 10,
         rotationSnapTolerance: 3,
         boundBoxFunc: (oldBox, newBox) => {
             newBox.width = Math.max(30, newBox.width)

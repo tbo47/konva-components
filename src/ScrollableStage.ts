@@ -1,6 +1,7 @@
 /**
  * https://github.com/tbo47/konva-components
  */
+import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { Stage, StageConfig } from 'konva-es/lib/Stage'
 import { Vector2d } from 'konva-es/lib/types'
 
@@ -19,7 +20,7 @@ function getCenter(p1: Vector2d, p2: Vector2d) {
     }
 }
 
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+const isTouchDevice = 'ontouchstart' in window
 
 export class ScrollableStage extends Stage {
     #lastCenter: Vector2d | null = null
@@ -168,4 +169,14 @@ export class ScrollableStage extends Stage {
         }
         return true
     }
+}
+/**
+ * Creates a new Transformer with snap effects and fixed for touch devices. 
+ */
+export const newComponentTransformer = () => {
+    return new Transformer({
+        rotationSnaps: [0],
+        anchorSize: isTouchDevice ? 20 : 10,
+        rotationSnapTolerance: 3,
+    })
 }

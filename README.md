@@ -13,29 +13,27 @@ This regroups components build on top of [konva-es](https://www.npmjs.com/packag
 [Here is a demo and the code is bellow](https://command-and-control.cloud/#/demo):
 
 ```javascript
-import { Cloud, EditableText, newTransformerForText, ScrollableStage } from 'konva-es-components'
+import { Cloud, EditableText, newComponentTransformer, newTransformerForText, ScrollableStage } from 'konva-es-components'
 import { Layer } from 'konva-es/lib/Layer'
-import { Transformer } from 'konva-es/lib/shapes/Transformer'
 
 const stage = new ScrollableStage({
     container: 'container', // id of container <div>
     width: window.innerWidth,
     height: window.innerHeight,
-    scaleBy: 1.02, // how strong is the zoom
 })
 
-const layer = new Konva.Layer()
+const layer = new Layer()
 stage.add(layer)
 
-const tr = new Konva.Transformer()
+const tr = newComponentTransformer()
 layer.add(tr)
-const cloud = new Cloud({ x: 100, y: 120, draggable: true, pattern: 1 })
+const cloud = new Cloud({ x: 100, y: 120, draggable: true })
 layer.add(cloud)
 tr.nodes([cloud])
 
 const tt = newTransformerForText()
 layer.add(tt)
-const txt = new EditableText({ x: 100, y: 300, draggable: true, text: 'Example', transformer: tt })
+const txt = new EditableText({ x: 100, y: 300, width: 400, draggable: true, text, transformer: tt })
 layer.add(txt)
 tt.nodes([txt])
 ```
