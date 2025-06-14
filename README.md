@@ -25,7 +25,7 @@ const stage = new ScrollableStage({
 const layer = new Layer()
 stage.add(layer)
 
-const txt = new EditableText({ x: 30, y: 30, width: 400, text })
+const txt = new EditableText({ x: 30, y: 30, width: 400, text: "This is a text" })
 layer.add(txt)
 
 const cloud = new Cloud({ x: 100, y: 360 })
