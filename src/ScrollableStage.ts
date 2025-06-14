@@ -6,6 +6,8 @@ import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { Stage, StageConfig } from 'konva-es/lib/Stage'
 import { Vector2d } from 'konva-es/lib/types'
 
+export const isTouchDevice = 'ontouchstart' in window
+
 export const newTransformerForText = () => {
     return new Transformer({
         enabledAnchors: ['middle-left', 'middle-right'],
@@ -67,8 +69,6 @@ function getCenter(p1: Vector2d, p2: Vector2d) {
         y: (p1.y + p2.y) / 2,
     }
 }
-
-const isTouchDevice = 'ontouchstart' in window
 
 export class ScrollableStage extends Stage {
     #lastCenter: Vector2d | null = null
