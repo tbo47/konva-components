@@ -233,3 +233,14 @@ export class ScrollableStage extends Stage {
         return true
     }
 }
+
+export function findMinXY (pts: number[]) {
+    let minX = pts[0]
+    let minY = pts[1]
+    for (let i = 2; i < pts.length; i += 2) {
+        if (pts[i] < minX) minX = pts[i]
+        if (pts[i + 1] < minY) minY = pts[i + 1]
+    }
+    return { minX, minY }
+}
+

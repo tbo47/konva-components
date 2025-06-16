@@ -3,7 +3,7 @@
  */
 import { Arrow, ArrowConfig } from 'konva-es/lib/shapes/Arrow'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
+import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
 
 export interface EditableArrowConfig extends ArrowConfig {
     transformFollowLayer?: boolean
@@ -38,7 +38,14 @@ export class EditableArrow extends Arrow {
         })
         this.hitFunc((context) => {
             context.beginPath()
-            context.rect(0, 0, this.width(), this.height())
+            const pts = this.points()
+            if (this.x() === 0 && this.y() === 0 && pts.length > 3) {
+                // the points are in absolute coordinates, so we need to adjust the rectangle
+                const { minX, minY } = findMinXY(pts)
+                context.rect(minX, minY, this.width(), this.height())
+            } else {
+                context.rect(0, 0, this.width(), this.height())
+            }
             context.closePath()
             context.fillStrokeShape(this)
         })
@@ -58,14 +65,26 @@ export class EditableArrow extends Arrow {
         })
     }
     adjustPath(width: number, height: number) {
-        const points = this.points().map((p, i) => {
+        const pts = this.points()
+        let offsetX = 0
+        let offsetY = 0
+        if (this.x() === 0 && this.y() === 0 && pts.length > 3) {
+            // the points are in absolute coordinates, so we need to adjust the rectangle
+            const { minX, minY } = findMinXY(pts)
+            offsetX = minX
+            offsetY = minY
+        }
+        const points = pts.map((p, i) => {
+            p -= i % 2 === 0 ? offsetX : offsetY
             if (i % 2 === 0) {
                 p = (p / this.width()) * width
             } else {
                 p = (p / this.height()) * height
             }
+            p += i % 2 === 0 ? offsetX : offsetY
             return p
         })
         this.points(points)
     }
 }
+1
