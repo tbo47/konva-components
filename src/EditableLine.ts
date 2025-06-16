@@ -6,7 +6,6 @@ import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
 
 export interface EditableLineConfig extends LineConfig {
-    pattern?: 0 | 1
     transformFollowLayer?: boolean
 }
 
@@ -20,7 +19,6 @@ export class EditableLine extends Line {
         this.on('transformend', (e) => {
             const a = Math.abs(e.target.rotation())
             let { width, height } = this.getClientRect()
-            console.log('transformend', width, height, e.target.rotation())
             let scaleX = 1
             let scaleY = 1
             if (config.transformFollowLayer) {
@@ -41,7 +39,7 @@ export class EditableLine extends Line {
         })
         this.hitFunc((context) => {
             context.beginPath()
-            context.rect(4, 3, this.width() - 15, this.height() - 15)
+            context.rect(0, 0, this.width(), this.height())
             context.closePath()
             context.fillStrokeShape(this)
         })

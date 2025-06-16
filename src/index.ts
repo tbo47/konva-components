@@ -1,3 +1,5 @@
-export * from './Cloud'
-export * from './EditableText'
 export * from './ScrollableStage'
+export * from './Cloud'
+export * from './EditableArrow'
+export * from './EditableLine'
+export * from './EditableText'

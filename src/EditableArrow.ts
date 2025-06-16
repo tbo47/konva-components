@@ -1,16 +1,15 @@
 /**
  * https://github.com/tbo47/konva-components
  */
-import {Arrow, ArrowConfig } from 'konva-es/lib/shapes/Arrow'
+import { Arrow, ArrowConfig } from 'konva-es/lib/shapes/Arrow'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
 
 export interface EditableArrowConfig extends ArrowConfig {
-    pattern?: 0 | 1
     transformFollowLayer?: boolean
 }
 
-export class EditableArrow extends Arrow{
+export class EditableArrow extends Arrow {
     #transformer: Transformer
     constructor(config: EditableArrowConfig) {
         config.stroke = config.stroke || '#0058ff'
@@ -39,7 +38,7 @@ export class EditableArrow extends Arrow{
         })
         this.hitFunc((context) => {
             context.beginPath()
-            context.rect(4, 3, this.width() - 15, this.height() - 15)
+            context.rect(0, 0, this.width(), this.height())
             context.closePath()
             context.fillStrokeShape(this)
         })
