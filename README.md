@@ -27,9 +27,11 @@ stage.add(layer)
 
 const txt = new EditableText({ x: 30, y: 30, width: 400, text: "This is a text" })
 layer.add(txt)
+txt.on('dragend transformend', (e) => console.log(e))
 
 const cloud = new Cloud({ x: 100, y: 360 })
 layer.add(cloud)
+cloud.on('dragend transformend', (e) => console.log(e))
 ```
 
 Note: to use with [konva](https://www.npmjs.com/package/konva), just change `konva-es` by `konva` in the imports.

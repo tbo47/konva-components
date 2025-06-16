@@ -4,7 +4,7 @@
 import { Konva } from 'konva-es/lib/Global'
 import { Text, TextConfig } from 'konva-es/lib/shapes/Text'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { GLOBAL_KONVA_COMPONENTS_CONF, hideAllSelectedShape } from './ScrollableStage'
+import { GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
 
 export class EditableText extends Text {
     transformer: Transformer
@@ -34,7 +34,7 @@ export class EditableText extends Text {
             if (!layer) {
                 this.getLayer()!.add(this.transformer)
             }
-            hideAllSelectedShape()
+            unselectAllShapes()
             this.transformer.nodes([this])
             this.draggable(true)
             GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.push(this)

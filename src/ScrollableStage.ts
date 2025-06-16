@@ -43,7 +43,7 @@ export const GLOBAL_KONVA_COMPONENTS_CONF = {
     currentlySelected: [] as Shape[],
 }
 
-export const hideAllSelectedShape = () => {
+export const unselectAllShapes = () => {
     getTransformers().forEach((tr) => tr.nodes([]))
     GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.forEach((shape) => {
         shape.draggable(false)
@@ -164,7 +164,7 @@ export class ScrollableStage extends Stage {
         })
 
         this.on('click tap', (e) => {
-            if (e.target === this) hideAllSelectedShape()
+            if (e.target === this) unselectAllShapes()
         })
     }
 
