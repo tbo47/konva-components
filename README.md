@@ -32,6 +32,12 @@ txt.on('dragend transformend', (e) => console.log(e))
 const cloud = new Cloud({ x: 100, y: 360 })
 layer.add(cloud)
 cloud.on('dragend transformend', (e) => console.log(e))
+
+const line = new EditableLine({ x: 30, y: 630, points: [0, 100, 20, 40, 370, 0] })
+layer.add(line)
+
+const arrow = new EditableArrow({ x: 30, y: 730, points: [0, 100, 370, 0] })
+layer.add(arrow)
 ```
 
 Note: to use with [konva](https://www.npmjs.com/package/konva), just change `konva-es` by `konva` in the imports.

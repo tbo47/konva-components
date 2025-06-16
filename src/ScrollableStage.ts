@@ -8,27 +8,32 @@ import { Vector2d } from 'konva-es/lib/types'
 
 export const isTouchDevice = 'ontouchstart' in window
 
+export const transformerDefaultConfig = {
+    rotationSnaps: [0],
+    anchorSize: isTouchDevice ? 20 : 10,
+    rotationSnapTolerance: 3,
+}
 export const newTransformerForText = () => {
     return new Transformer({
+        ...transformerDefaultConfig,
         enabledAnchors: ['middle-left', 'middle-right'],
-        rotationSnaps: [0],
-        anchorSize: isTouchDevice ? 20 : 10,
-        rotationSnapTolerance: 3,
         boundBoxFunc: (oldBox, newBox) => {
             newBox.width = Math.max(30, newBox.width)
             return newBox
         },
     })
 }
+export const newTransformerNoRotation = () => {
+    return new Transformer({
+        ...transformerDefaultConfig,
+        rotateEnabled: false,
+    })
+}
 /**
  * Creates a new Transformer with snap effects and fixed for touch devices.
  */
 export const newComponentTransformer = () => {
-    return new Transformer({
-        rotationSnaps: [0],
-        anchorSize: isTouchDevice ? 20 : 10,
-        rotationSnapTolerance: 3,
-    })
+    return new Transformer({ ...transformerDefaultConfig })
 }
 
 export const GLOBAL_KONVA_COMPONENTS_CONF = {
@@ -40,6 +45,7 @@ export const GLOBAL_KONVA_COMPONENTS_CONF = {
      * All purpose transformer. For shapes that are not text.
      */
     transformer: newComponentTransformer(),
+    transformerNoRotation: newTransformerNoRotation(),
     currentlySelected: [] as Shape[],
 }
 
@@ -52,7 +58,11 @@ export const unselectAllShapes = () => {
 }
 
 export const getTransformers = () => {
-    return [GLOBAL_KONVA_COMPONENTS_CONF.editableTextTransformer, GLOBAL_KONVA_COMPONENTS_CONF.transformer]
+    return [
+        GLOBAL_KONVA_COMPONENTS_CONF.editableTextTransformer,
+        GLOBAL_KONVA_COMPONENTS_CONF.transformer,
+        GLOBAL_KONVA_COMPONENTS_CONF.transformerNoRotation,
+    ]
 }
 
 export interface ScrollableStageConfig extends StageConfig {

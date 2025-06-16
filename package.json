@@ -1,6 +1,6 @@
 {
     "name": "konva-es-components",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "type": "module",
     "author": "tbo47",
     "description": "Konva components for konva-es",
@@ -21,12 +21,16 @@
         "typescript": "~5.8.3"
     },
     "files": [
-        "./index.js",
-        "./index.d.ts",
-        "./Cloud.js",
-        "./Cloud.d.ts",
-        "./EditableText.js",
-        "./EditableText.d.ts",
+        "Cloud.d.ts",
+        "Cloud.js",
+        "EditableArrow.d.ts",
+        "EditableArrow.js",
+        "EditableLine.d.ts",
+        "EditableLine.js",
+        "EditableText.d.ts",
+        "EditableText.js",
+        "index.d.ts",
+        "index.js",
         "./ScrollableStage.js",
         "./ScrollableStage.d.ts"
     ],
