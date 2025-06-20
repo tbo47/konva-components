@@ -135,6 +135,7 @@ export class Cloud extends Path {
             this.#transformer.nodes([this])
             this.draggable(true)
             GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.push(this)
+            this.moveToTop()
         })
     }
     adjustPath(width: number, height: number) {

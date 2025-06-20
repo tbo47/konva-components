@@ -38,6 +38,7 @@ export class EditableText extends Text {
             this.transformer.nodes([this])
             this.draggable(true)
             GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.push(this)
+            this.moveToTop()
         })
     }
 
