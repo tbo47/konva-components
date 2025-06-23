@@ -8,9 +8,13 @@ import { Vector2d } from 'konva-es/lib/types'
 
 export const isTouchDevice = 'ontouchstart' in window
 
+export function getAnchorSize() {
+    return isTouchDevice ? 20 : 10
+}
+
 export const transformerDefaultConfig = {
     rotationSnaps: [0],
-    anchorSize: isTouchDevice ? 20 : 10,
+    anchorSize: getAnchorSize(),
     rotationSnapTolerance: 3,
 }
 export const newTransformerForText = () => {
@@ -234,7 +238,7 @@ export class ScrollableStage extends Stage {
     }
 }
 
-export function findMinXY (pts: number[]) {
+export function findMinXY(pts: number[]) {
     let minX = pts[0]
     let minY = pts[1]
     for (let i = 2; i < pts.length; i += 2) {
@@ -243,4 +247,3 @@ export function findMinXY (pts: number[]) {
     }
     return { minX, minY }
 }
-
