@@ -36,20 +36,9 @@ export class EditableArrow extends Arrow {
             this.scaleX(1)
             this.scaleY(1)
         })
-        const hitFuncOffset = 7
-        this.hitFunc((context) => {
-            context.beginPath()
-            const pts = this.points()
-            if (this.x() === 0 && this.y() === 0 && pts.length > 3) {
-                // the points are in absolute coordinates, so we need to adjust the rectangle
-                const { minX, minY } = findMinXY(pts)
-                context.rect(minX, minY, this.width(), this.height() - hitFuncOffset)
-            } else {
-                context.rect(0, 0, this.width(), this.height() - hitFuncOffset)
-            }
-            context.closePath()
-            context.fillStrokeShape(this)
-        })
+        if (this.strokeWidth() < 10) {
+            this.hitStrokeWidth(10)
+        }
         if (!('ontouchstart' in window)) {
             this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
             this.on('mouseout', (e) => (e.target.getStage()!.container().style.cursor = 'default'))
