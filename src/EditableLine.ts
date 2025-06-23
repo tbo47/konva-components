@@ -3,7 +3,7 @@
  */
 import { Line, LineConfig } from 'konva-es/lib/shapes/Line'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
+import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './ScrollableStage'
 
 export interface EditableLineConfig extends LineConfig {
     transformFollowLayer?: boolean
@@ -38,6 +38,9 @@ export class EditableLine extends Line {
         })
         if (this.strokeWidth() < 10) {
             this.hitStrokeWidth(10)
+        }
+        if (this.strokeWidth() < 10 && isTouchDevice) {
+            this.hitStrokeWidth(30)
         }
         if (!('ontouchstart' in window)) {
             this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))

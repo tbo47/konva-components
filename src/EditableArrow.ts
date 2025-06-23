@@ -3,7 +3,7 @@
  */
 import { Arrow, ArrowConfig } from 'konva-es/lib/shapes/Arrow'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
+import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './ScrollableStage'
 
 export interface EditableArrowConfig extends ArrowConfig {
     transformFollowLayer?: boolean
@@ -38,6 +38,9 @@ export class EditableArrow extends Arrow {
         })
         if (this.strokeWidth() < 10) {
             this.hitStrokeWidth(10)
+        }
+        if (this.strokeWidth() < 10 && isTouchDevice) {
+            this.hitStrokeWidth(30)
         }
         if (!('ontouchstart' in window)) {
             this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
