@@ -9,8 +9,8 @@ import { EditableArrow } from './EditableArrow'
 
 export const isTouchDevice = 'ontouchstart' in window
 
-export function getAnchorSize() {
-    return isTouchDevice ? 20 : 10
+export function getAnchorSize(scale = 1) {
+    return (isTouchDevice ? 20 : 10) / scale
 }
 
 export const transformerDefaultConfig = {

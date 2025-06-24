@@ -93,19 +93,9 @@ export class Cloud extends Path {
 
         this.on('transformend', (e) => {
             let { width, height } = this.getClientRect()
-            let scaleX = 1
-            let scaleY = 1
-            if (config.transformFollowLayer) {
-                const layer = this.getLayer()!
-                scaleX = layer.scaleX()
-                scaleY = layer.scaleY()
-            } else {
-                const stage = this.getStage()!
-                scaleX = stage.scaleX()
-                scaleY = stage.scaleY()
-            }
-            width = width / scaleX
-            height = height / scaleY
+            const scale = (config.transformFollowLayer ? this.getLayer()! : this.getStage()!).scale()
+            width = width / scale.x
+            height = height / scale.y
 
             const a = Math.abs(e.target.rotation())
             const sinA = Math.sin((a * Math.PI) / 180)
