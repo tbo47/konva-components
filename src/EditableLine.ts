@@ -27,12 +27,13 @@ export class EditableLine extends Line {
             this.scaleX(1)
             this.scaleY(1)
         })
-        if (this.strokeWidth() < 10) {
-            this.hitStrokeWidth(10)
+        if (this.strokeWidth() < 20) {
+            this.hitStrokeWidth(20)
         }
-        if (this.strokeWidth() < 10 && isTouchDevice) {
-            this.hitStrokeWidth(30)
+        if (this.strokeWidth() < 20 && isTouchDevice) {
+            this.hitStrokeWidth(50)
         }
+
         if (!('ontouchstart' in window)) {
             this.on('mouseover', (e) => (e.target.getStage()!.container().style.cursor = 'move'))
             this.on('mouseout', (e) => (e.target.getStage()!.container().style.cursor = 'default'))
