@@ -5,6 +5,7 @@ import { Shape } from 'konva-es/lib/Shape'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
 import { Stage, StageConfig } from 'konva-es/lib/Stage'
 import { Vector2d } from 'konva-es/lib/types'
+import { EditableArrow } from './EditableArrow'
 
 export const isTouchDevice = 'ontouchstart' in window
 
@@ -57,6 +58,8 @@ export const unselectAllShapes = () => {
     getTransformers().forEach((tr) => tr.nodes([]))
     GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.forEach((shape) => {
         shape.draggable(false)
+        const arrow = shape as EditableArrow
+        arrow.anchors?.forEach((anchor) => anchor.destroy())
     })
     GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected = []
 }
