@@ -34,7 +34,6 @@ export class ScrollableStage extends Stage {
         this.on('wheel', (e) => {
             e.evt.preventDefault()
             if (e.evt.ctrlKey) {
-                // TODO debounce this?
                 this.#handleZoom(e.evt, scaleBy)
             } else {
                 this.#handlePan(e.evt)
@@ -55,6 +54,7 @@ export class ScrollableStage extends Stage {
             }
 
             if (touch1 && touch2) {
+                unselectAllShapes()
                 // if the stage was under Konva's drag&drop
                 // we need to stop it, and implement our own pan logic with two pointers
                 if (this.isDragging()) {
@@ -134,6 +134,7 @@ export class ScrollableStage extends Stage {
     }
 
     #handleZoom(evt: WheelEvent, scaleBy: number) {
+        unselectAllShapes()
         const isTrackpad = this.#detectTrackpad(evt)
         const oldScale = this.scaleX()
         const pointer = this.getPointerPosition()
