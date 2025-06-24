@@ -3,19 +3,10 @@
  */
 import { Arrow, ArrowConfig } from 'konva-es/lib/shapes/Arrow'
 import { Rect } from 'konva-es/lib/shapes/Rect'
-import { getAnchorSize, GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './ScrollableStage'
+import { debounce, getAnchorSize, GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './Utils'
 
 export interface EditableArrowConfig extends ArrowConfig {
     transformFollowLayer?: boolean
-}
-
-// Utility debounce function
-function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
-    let timeout: ReturnType<typeof setTimeout> | null = null
-    return (...args: Parameters<T>) => {
-        if (timeout) clearTimeout(timeout)
-        timeout = setTimeout(() => fn(...args), delay)
-    }
 }
 
 export class EditableArrow extends Arrow {

@@ -4,7 +4,7 @@
 import { Konva } from 'konva-es/lib/Global'
 import { Text, TextConfig } from 'konva-es/lib/shapes/Text'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './ScrollableStage'
+import { GLOBAL_KONVA_COMPONENTS_CONF, unselectAllShapes } from './Utils'
 
 export class EditableText extends Text {
     transformer: Transformer

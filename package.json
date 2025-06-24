@@ -39,8 +39,10 @@
         "EditableText.js",
         "index.d.ts",
         "index.js",
-        "./ScrollableStage.js",
-        "./ScrollableStage.d.ts"
+        "ScrollableStage.js",
+        "ScrollableStage.d.ts",
+        "Utils.js",
+        "Utils.d.ts"
     ],
     "license": "MIT"
 }

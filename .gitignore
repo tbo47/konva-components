@@ -12,3 +12,5 @@ node_modules
 package-lock.json
 ScrollableStage.d.ts
 ScrollableStage.js
+Utils.d.ts
+Utils.js

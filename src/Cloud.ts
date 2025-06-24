@@ -3,7 +3,7 @@
  */
 import { Path, PathConfig } from 'konva-es/lib/shapes/Path'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './ScrollableStage'
+import { GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './Utils'
 
 /**
  * https://yqnn.github.io/svg-path-editor/#P=m0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_4_-2_a_4.6_4.6_0_0_1_8_2_m_0_0_a_3_3_0_0_1_2_4_a_4.6_4.6_0_0_1_-2_8_m_0_0_a_3_3_0_0_1_2_4_a_4.6_4.6_0_0_1_-2_8_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-4_2_a_4.6_4.6_0_0_1_-8_-2_m_0_0_a_3_3_0_0_1_-2_-4_a_4.6_4.6_0_0_1_2_-8_m_0_0_a_3_3_0_0_1_-2_-4_a_4.6_4.6_0_0_1_2_-8_m_0_0

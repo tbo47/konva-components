@@ -3,7 +3,7 @@
  */
 import { Line, LineConfig } from 'konva-es/lib/shapes/Line'
 import { Transformer } from 'konva-es/lib/shapes/Transformer'
-import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './ScrollableStage'
+import { findMinXY, GLOBAL_KONVA_COMPONENTS_CONF, isTouchDevice, unselectAllShapes } from './Utils'
 
 export interface EditableLineConfig extends LineConfig {
     transformFollowLayer?: boolean
