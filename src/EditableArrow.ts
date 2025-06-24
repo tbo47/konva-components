@@ -9,6 +9,15 @@ export interface EditableArrowConfig extends ArrowConfig {
     transformFollowLayer?: boolean
 }
 
+// Utility debounce function
+function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
+    let timeout: ReturnType<typeof setTimeout> | null = null
+    return (...args: Parameters<T>) => {
+        if (timeout) clearTimeout(timeout)
+        timeout = setTimeout(() => fn(...args), delay)
+    }
+}
+
 export class EditableArrow extends Arrow {
     anchors: Rect[] = []
     transformFollowLayer = false
@@ -53,7 +62,6 @@ export class EditableArrow extends Arrow {
         const pts = this.points()
         const x = this.x()
         const y = this.y()
-        let optiIndex = 0
         const scale = (this.transformFollowLayer ? this.getLayer()! : this.getStage()!).scale()
         const anchorOffset = getAnchorSize(scale.x) / 2
         const anchorStart = this.#createAnchor(
@@ -66,16 +74,16 @@ export class EditableArrow extends Arrow {
         anchorStart.on('dragstart', () => {
             this.draggable(false)
         })
-        const anchorDragAction = (optimize = true) => {
-            if (optimize && optiIndex++ % 6 !== 0) return
+        const anchorDragAction = () => {
             const pts = this.points()
             pts[0] = anchorStart.x() - this.x() + anchorOffset
             pts[1] = anchorStart.y() - this.y() + anchorOffset
             this.points(pts)
         }
-        anchorStart.on('dragmove', () => anchorDragAction())
+        const debouncedAnchorDragAction = debounce(anchorDragAction, 16) // ~60fps
+        anchorStart.on('dragmove', () => debouncedAnchorDragAction())
         anchorStart.on('dragend', () => {
-            anchorDragAction(false)
+            anchorDragAction()
             this.draggable(true)
             this.fire('transformend')
         })
@@ -89,16 +97,16 @@ export class EditableArrow extends Arrow {
         anchorEnd.on('dragstart', () => {
             this.draggable(false)
         })
-        const anchorDragActionEnd = (optimize = true) => {
-            if (optimize && optiIndex++ % 6 !== 0) return
+        const anchorDragActionEnd = () => {
             const pts = this.points()
             pts[pts.length - 2] = anchorEnd.x() - this.x() + anchorOffset
             pts[pts.length - 1] = anchorEnd.y() - this.y() + anchorOffset
             this.points(pts)
         }
-        anchorEnd.on('dragmove', () => anchorDragActionEnd())
+        const debouncedAnchorDragActionEnd = debounce(anchorDragActionEnd, 16) // ~60fps
+        anchorEnd.on('dragmove', () => debouncedAnchorDragActionEnd())
         anchorEnd.on('dragend', () => {
-            anchorDragActionEnd(false)
+            anchorDragActionEnd()
             this.draggable(true)
             this.fire('transformend')
         })
