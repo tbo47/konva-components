@@ -3,7 +3,7 @@
  */
 import { Stage, StageConfig } from 'konva-es/lib/Stage'
 import { Vector2d } from 'konva-es/lib/types'
-import { unselectAllShapes } from './Utils'
+import { isTouchDevice, unselectAllShapes } from './Utils'
 
 export interface ScrollableStageConfig extends StageConfig {
     scaleBy?: number
@@ -40,7 +40,9 @@ export class ScrollableStage extends Stage {
                 this.#handlePan(e.evt)
             }
         })
-        this.#preventDefaultTouchActions()
+
+        if (isTouchDevice) this.#preventDefaultTouchActions()
+
         //this.container().addEventListener('contextmenu', (e) => e.preventDefault())
 
         this.on('touchmove', (e) => {
