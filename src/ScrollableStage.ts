@@ -34,6 +34,7 @@ export class ScrollableStage extends Stage {
         this.on('wheel', (e) => {
             e.evt.preventDefault()
             if (e.evt.ctrlKey) {
+                // TODO debounce this?
                 this.#handleZoom(e.evt, scaleBy)
             } else {
                 this.#handlePan(e.evt)

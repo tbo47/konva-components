@@ -25,19 +25,21 @@ const stage = new ScrollableStage({
 const layer = new Layer()
 stage.add(layer)
 
-const txt = new EditableText({ x: 30, y: 30, width: 400, text: "This is a text" })
+const txt = new EditableText({ x: 30, y: 30, width: 300, text: "This is a text" })
 layer.add(txt)
 txt.on('dragend transformend', (e) => console.log(e))
 
 const cloud = new Cloud({ x: 100, y: 360 })
 layer.add(cloud)
-cloud.on('dragend transformend', (e) => console.log(e))
+cloud.on('dragend transformend', console.log)
 
-const line = new EditableLine({ x: 30, y: 630, points: [0, 100, 20, 40, 370, 0] })
+const line = new EditableLine({ x: 30, y: 630, points: [0, 100, 20, 40, 300, 0] })
 layer.add(line)
+line.on('dragend transformend', console.log)
 
-const arrow = new EditableArrow({ x: 30, y: 730, points: [0, 100, 370, 0] })
+const arrow = new EditableArrow({ x: 30, y: 730, points: [0, 100, 300, 0] })
 layer.add(arrow)
+arrow.on('dragend transformend', console.log)
 ```
 
 Note: to use with [konva](https://www.npmjs.com/package/konva), just change `konva-es` by `konva` in the imports.

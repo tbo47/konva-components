@@ -1,6 +1,6 @@
 {
     "name": "konva-es-components",
-    "version": "2.0.14",
+    "version": "2.0.15",
     "type": "module",
     "author": "tbo47",
     "description": "Konva components for konva-es",
