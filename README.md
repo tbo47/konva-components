@@ -45,3 +45,8 @@ arrow.on('dragend transformend', console.log)
 Note: to use with [konva](https://www.npmjs.com/package/konva), just change `konva-es` by `konva` in the imports.
 
 Install in your project: `npm install konva-es-components`
+
+Note: you may need to re-initialize the Transformers if you are coming from an other page and the Layer has been recreated (a router navigation in Angular for example):
+```javascript
+resetGlobalKonvaComponentsConf()
+```
