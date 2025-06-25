@@ -61,6 +61,13 @@ export const GLOBAL_KONVA_COMPONENTS_CONF = {
     currentlySelected: [] as Shape[],
 }
 
+export const resetGlobalKonvaComponentsConf = () => {
+    GLOBAL_KONVA_COMPONENTS_CONF.editableTextTransformer = newTransformerForText()
+    GLOBAL_KONVA_COMPONENTS_CONF.transformer = newComponentTransformer()
+    GLOBAL_KONVA_COMPONENTS_CONF.transformerNoRotation = newTransformerNoRotation()
+    GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected = []
+}
+
 export const unselectAllShapes = () => {
     getTransformers().forEach((tr) => tr.nodes([]))
     GLOBAL_KONVA_COMPONENTS_CONF.currentlySelected.forEach((shape) => {
