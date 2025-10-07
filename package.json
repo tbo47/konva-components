@@ -17,16 +17,18 @@
         "url": "git+https://github.com/tbo47/konva-components.git"
     },
     "scripts": {
+        "bundle": "rm -rf dist ; chmod +x bundle.sh ; ./bundle.sh && cp dist/*.js ../tbo47.github.io",
         "clean": "rm -rf *.js *.d.ts",
         "build": "npm run clean ; tsc",
         "prepublishOnly": "npm run build",
         "watch": "npm run clean ; tsc --watch"
     },
     "dependencies": {
-        "konva-es": "^9.3.20"
+        "konva-es": "^10.0.2"
     },
     "devDependencies": {
-        "typescript": "~5.8.3"
+        "esbuild": "^0.25.10",
+        "typescript": "~5.9.3"
     },
     "files": [
         "Cloud.d.ts",
