@@ -10,7 +10,7 @@ This regroups components build on top of [konva-es](https://www.npmjs.com/packag
 -   [Cloud.ts](src/Cloud.ts) let you draw clouds
 -   [EditableText.ts](src/EditableText.ts) is [this example](https://konvajs.org/docs/sandbox/Editable_Text.html) wrapped in a component with some changes
 
-[Here is a demo and the code is bellow](https://command-and-control.cloud/#/demo):
+[Here is a demo and the code is bellow](https://command-and-control.cloud/demo):
 
 ```javascript
 import { Cloud, EditableText, ScrollableStage } from 'konva-es-components'
