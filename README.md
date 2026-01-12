@@ -10,7 +10,7 @@ This regroups components build on top of [konva-es](https://www.npmjs.com/packag
 -   [Cloud.ts](src/Cloud.ts) let you draw clouds
 -   [EditableText.ts](src/EditableText.ts) is [this example](https://konvajs.org/docs/sandbox/Editable_Text.html) wrapped in a component with some changes
 
-[Here is a demo and the code is bellow](https://command-and-control.cloud/demo):
+[Here is a demo and the code is bellow](https://sketchphysics.com/demo):
 
 ```javascript
 import { Cloud, EditableText, ScrollableStage } from 'konva-es-components'
@@ -25,7 +25,7 @@ const stage = new ScrollableStage({
 const layer = new Layer()
 stage.add(layer)
 
-const txt = new EditableText({ x: 30, y: 30, width: 300, text: "This is a text" })
+const txt = new EditableText({ x: 30, y: 30, width: 300, text: 'This is a text' })
 layer.add(txt)
 txt.on('dragend transformend', (e) => console.log(e))
 
@@ -47,6 +47,7 @@ Note: to use with [konva](https://www.npmjs.com/package/konva), just change `kon
 Install in your project: `npm install konva-es-components`
 
 Note: you may need to re-initialize the Transformers if you are coming from an other page and the Layer has been recreated (a router navigation in Angular for example):
+
 ```javascript
 resetGlobalKonvaComponentsConf()
 ```
